@@ -1,0 +1,23 @@
+{
+  "name": "winston-insightops",
+  "version": "1.0.0",
+  "description": "Winston Transport for Rapid7 InsightOps",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luiselizondo/winston-insightops.git"
+  },
+  "keywords": [
+    "winston",
+    "insightops"
+  ],
+  "author": "Luis Elizondo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/luiselizondo/winston-insightops/issues"
+  },
+  "homepage": "https://github.com/luiselizondo/winston-insightops#readme"
+}
