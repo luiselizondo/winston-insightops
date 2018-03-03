@@ -38,22 +38,20 @@ util.inherits(InsightOpsTransport, winston.Transport)
 
 winston.transports.InsightOpsTransport = InsightOpsTransport
 
+function objectIsEmpty(obj) {
+  return Object.keys(obj).length === 0 && obj.constructor === Object
+}
+
 InsightOpsTransport.prototype.log = function (level, message, meta, callback) {
   if (this.silent) {
     return callback(null, true);
   }
 
   var _level = transformLevel(level)
-
-  if (typeof message === 'string') {
-    this.logger.log(_level, message)
-  }
-  else {
-    this.logger.log(_level, Object.assign({}, message))
-  }
+  this.logger.log(_level, message)
   
-  if (meta) {
-    this.logger.log(_level, Object.assign({}, meta))
+  if (!objectIsEmpty(meta)) {
+    this.logger.log(_level, meta)
   }
 
   callback(null, true);
