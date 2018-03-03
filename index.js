@@ -44,10 +44,16 @@ InsightOpsTransport.prototype.log = function (level, message, meta, callback) {
   }
 
   var _level = transformLevel(level)
-  this.logger.log(_level, message)
+
+  if (typeof message === 'string') {
+    this.logger.log(_level, message)
+  }
+  else {
+    this.logger.log(_level, Object.assign({}, message))
+  }
   
   if (meta) {
-    this.logger.log(_level, meta)
+    this.logger.log(_level, Object.assign({}, meta))
   }
 
   callback(null, true);
