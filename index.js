@@ -56,3 +56,22 @@ InsightOpsTransport.prototype.log = function (level, message, meta, callback) {
 
   callback(null, true);
 }
+
+InsightOpsTransport.prototype.logException = function (msg, meta, callback, err) {
+	var self = this;
+
+	function onLogged () {
+		self.removeListener('error', onError);
+		callback();
+	}
+
+	function onError () {
+		self.removeListener('logged', onLogged);
+		callback();
+	}
+
+	this.once('logged', onLogged);
+	this.once('error', onError);
+
+	this.logger.log('err', err)
+};
