@@ -27,9 +27,9 @@ var InsightOpsTransport = module.exports = function (options) {
   }
 
   this.silent = options.silent || false
-  
-  this.logger = new Logger({ 
-    token: options.token, 
+
+  this.logger = new Logger({
+    token: options.token,
     region: options.region || DEFAULT_REGION
   })
 }
@@ -48,8 +48,11 @@ InsightOpsTransport.prototype.log = function (level, message, meta, callback) {
   }
 
   var _level = transformLevel(level)
-  this.logger.log(_level, message)
-  
+
+  if (message) {
+    this.logger.log(_level, message)
+  }
+
   if (!objectIsEmpty(meta)) {
     this.logger.log(_level, meta)
   }
