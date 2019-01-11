@@ -1,6 +1,6 @@
 {
   "name": "winston-insightops",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Winston Transport for Rapid7 InsightOps",
   "main": "index.js",
   "scripts": {
