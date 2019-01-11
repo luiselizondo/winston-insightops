@@ -50,27 +50,27 @@ InsightOpsTransport.prototype.log = function (level, message, meta, callback) {
   }
 
   if (meta) {
-    this.logger.log(_level, Object.assign({}, meta))
+    this.logger.log(_level, meta)
   }
 
   callback(null, true);
 }
 
 InsightOpsTransport.prototype.logException = function (msg, meta, callback, err) {
-	var self = this;
+  var self = this;
 
-	function onLogged () {
-		self.removeListener('error', onError);
-		callback();
-	}
+  function onLogged () {
+    self.removeListener('error', onError);
+    callback();
+  }
 
-	function onError () {
-		self.removeListener('logged', onLogged);
-		callback();
-	}
+  function onError () {
+    self.removeListener('logged', onLogged);
+    callback();
+  }
 
-	this.once('logged', onLogged);
-	this.once('error', onError);
+  this.once('logged', onLogged);
+  this.once('error', onError);
 
-	this.logger.log('err', err)
+  this.logger.log('err', err)
 };
