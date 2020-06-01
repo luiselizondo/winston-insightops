@@ -1,6 +1,6 @@
 {
   "name": "winston-insightops",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Winston Transport for Rapid7 InsightOps",
   "main": "index.js",
   "scripts": {
@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/luiselizondo/winston-insightops/issues"
   },
-  "homepage": "https://github.com/luiselizondo/winston-insightops#readme"
+  "homepage": "https://github.com/luiselizondo/winston-insightops#readme",
+  "dependencies": {
+    "lodash": "^4.17.15"
+  }
 }

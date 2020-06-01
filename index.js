@@ -1,11 +1,12 @@
-var winston = require('winston')
-var util = require('util')
+const winston = require('winston')
+const util = require('util')
+const _ = require('lodash')
 
 const DEFAULT_REGION = 'us'
-var Logger = require('r7insight_node')
+const Logger = require('r7insight_node')
 
-function transformLevel (level) {
-  var codes = {
+function transformLevel(level) {
+  const codes = {
     error: 'err',
     warn: 'warning',
     info: 'info',
@@ -17,7 +18,7 @@ function transformLevel (level) {
   return codes[level]
 }
 
-var InsightOpsTransport = module.exports = function (options) {
+let InsightOpsTransport = module.exports = function (options) {
   options = options || {}
 
   winston.Transport.call(this, options)
@@ -43,13 +44,13 @@ InsightOpsTransport.prototype.log = function (level, message, meta, callback) {
     return callback(null, true);
   }
 
-  var _level = transformLevel(level)
+  const _level = transformLevel(level)
 
-  if (message) {
+  if (!_.isEmpty(message)) {
     this.logger.log(_level, message)
   }
 
-  if (meta) {
+  if (!_.isEmpty(meta)) {
     this.logger.log(_level, meta)
   }
 
@@ -57,14 +58,14 @@ InsightOpsTransport.prototype.log = function (level, message, meta, callback) {
 }
 
 InsightOpsTransport.prototype.logException = function (msg, meta, callback, err) {
-  var self = this;
+  let self = this;
 
-  function onLogged () {
+  function onLogged() {
     self.removeListener('error', onError);
     callback();
   }
 
-  function onError () {
+  function onError() {
     self.removeListener('logged', onLogged);
     callback();
   }
