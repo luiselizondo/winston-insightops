@@ -47,11 +47,7 @@ InsightOpsTransport.prototype.log = function (level, message, meta, callback) {
   const _level = transformLevel(level)
 
   if (!_.isEmpty(message)) {
-    this.logger.log(_level, message)
-  }
-
-  if (!_.isEmpty(meta)) {
-    this.logger.log(_level, meta)
+    this.logger.log(_level, message, meta)
   }
 
   callback(null, true);
